@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "main": "dist-electron/main.js",
+  "debug": {
+    "env": {
+      "VITE_DEV_SERVER_URL": "http://127.0.0.1:3344/"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "run-p build-only:*",
+    "build-only": "run-s build-only:*",
     "build-only:vue": "vite build",
     "build-only:electron": "electron-builder",
     "type-check": "vue-tsc --build --force",

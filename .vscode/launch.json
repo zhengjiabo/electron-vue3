@@ -2,38 +2,52 @@
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "Main + renderer",
-      "configurations": ["Main", "Renderer"],
-      "stopAll": true,
+      "name": "Debug App",
+      "preLaunchTask": "Before Debug",
+      "configurations": [
+        "Debug Main Process",
+        "Debug Renderer Process"
+      ],
       "presentation": {
+        "hidden": false,
+        "group": "",
         "order": 1
-      }
+      },
+      "stopAll": true
     }
   ],
   "configurations": [
     {
-      "name": "Renderer",
-      "port": 9222,
-      "request": "attach",
-      "type": "chrome",
-      "webRoot": "${workspaceFolder}/src/renderer",
-      "timeout": 60000,
-      "presentation": {
-        "hidden": true
-      }
-    },
-    {
-      "name": "Main",
+      "name": "Debug Main Process",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "args": [".", "--remote-debugging-port=9222", "--trace-warnings", "--sourcemap"],
+      "runtimeArgs": [
+        "--trace-warnings", 
+        "--sourcemap",
+        "--remote-debugging-port=9229",
+        "."
+      ],
+      "envFile": "${workspaceFolder}/.vscode/.debug.env",
       "outputCapture": "std",
       "console": "integratedTerminal"
-    }
+    },
+    {
+      "name": "Debug Renderer Process",
+      "port": 9229,
+      "request": "attach",
+      "type": "chrome",
+      "timeout": 60000,
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceRoot}/node_modules/**",
+        "${workspaceRoot}/dist-electron/**",
+        // Skip files in host(VITE_DEV_SERVER_URL)
+        "http://127.0.0.1:3344/**"
+      ]
+    },
   ]
 }
