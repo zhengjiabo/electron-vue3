@@ -48,6 +48,9 @@ const rules = reactive<FormRules<RuleForm>>({
   ],
 })
 
+// const { on, send } = window.ipcRenderer
+// on('fromMain',(event: Object, args: string) =>console.log('get', args))
+// send('toMain', 'okokok')
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {

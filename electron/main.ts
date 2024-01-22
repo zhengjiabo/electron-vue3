@@ -1,4 +1,4 @@
-import { app, BrowserWindow  } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 
 // The built directory structure
@@ -59,3 +59,12 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
+
+ipcMain.on("toMain", (event, args) => {
+  // fs.readFile("path/to/file", (error, data) => {
+    // Do something with file contents
+
+    // Send result back to renderer process
+    // win.webContents.send("fromMain", args);
+  // });
+});
