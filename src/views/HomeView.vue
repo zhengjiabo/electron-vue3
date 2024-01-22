@@ -13,7 +13,7 @@
     </el-tabs>
   </el-watermark>
 </template>
-<script setup>
+<script setup lang="ts">
 import HomeMessage from '@/views/home/HomeMessage.vue'
 import HomeConfig from '@/views/home/HomeConfig.vue'
 import HomeLog from '@/views/home/HomeLog.vue'
